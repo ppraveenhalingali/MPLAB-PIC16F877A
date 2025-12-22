@@ -1,28 +1,26 @@
-/*
- * File:   main.c
- * Author: DELL
- *
- * Created on December 22, 2025, 10:54 AM
- */
-
-
 #include <xc.h>
-// turn of WDT
+
+// turn off WDT
 #pragma config WDTE = OFF
 
-void init_config() {
-    TRISB = 0X00;
+void init_config()
+{
+    TRISDbits.TRISD0 = 0;   // OUTPUT PIN
+    TRISBbits.TRISB0 = 1;   // RB0 IS INPUT PIN
 }
 
-void main(void) {
+void main(void)
+{
     init_config();
-    while (1) {
-        PORTB = 0xFF;
-        for (unsigned int wait = 50000; wait--;);
-        PORTB = 0x00;
-        for (unsigned int wait = 50000; wait--;);
-    }
 
+    while(1)
+    {
+        if(PORTBbits.RB0 == 0)
+        {
+            PORTDbits.RD0 = !PORTDbits.RD0;
+            for(unsigned int wait = 50000; wait--;);
+        }
+    }
 
     return;
 }
