@@ -1,39 +1,21 @@
-/*
- * File:   main.c
- */
-
 #include <xc.h>
+#include "clcd.h"
 
-#include "matrix_keypad.h"
+/* Configuration Bits (Example for PIC16F877A) */
+#pragma config FOSC = HS, WDTE = OFF, PWRTE = OFF, BOREN = OFF, LVP = OFF
 
-#pragma config WDTE = OFF        // Watchdog Timer Enable bit (WDT disabled)
-
-
-
-
-
-
-static void init_config(void) {
-   
-    init_matrix_keypad();
-    TRISB4 = 0;
-    
-    
+void init_config(void)
+{
+    init_clcd();
 }
 
-void main(void) {
-    unsigned char key;
-    
+void main(void)
+{
     init_config();
 
-    while (1) {
-        key = read_matrix_keypad(STATE);  // 0 1 2 3 4 5 6 7 8 9 '*' '#'  ALL_RELEASED
-        if(key == 1)
-        {
-            RB4 = !RB4;
-        }
-        
+    while (1)
+    {
+        clcd_print("HELLO WORLD", LINE1(0));
+        clcd_print("LCD WORKING", LINE2(2));
     }
-   
 }
-
