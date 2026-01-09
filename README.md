@@ -91,4 +91,3 @@ I plan to add more advanced projects such as:
 * LCD interfacing
 * Sensor interfacing
 * Automation-based projects
-* 
